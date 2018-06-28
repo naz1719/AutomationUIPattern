@@ -6,6 +6,7 @@ import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -15,6 +16,7 @@ import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
@@ -72,6 +74,21 @@ public class WebDriverFactory {
 
                 WebDriver ghostDriver = new PhantomJSDriver();
                 return ghostDriver;
+            case TOR:
+                System.setProperty("webdriver.chrome.driver",
+                        propertiesLoader.getChromeDriverPath());
+                File torProfileDir = new File("C:\\Users\\Nazar Khimin\\Downloads\\Tor Browser\\Browser\\TorBrowser\\Data\\Browser\\profile.default");
+                String path = "C:\\Users\\Nazar Khimin\\Downloads\\Tor Browser\\Browser";
+
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("user-data-dir=" + torProfileDir);
+                String host = "127.0.0.1";
+                String port = "9150";
+                chromeOptions.addArguments("--proxy-server=socks5://" + host + ":" + port);
+                chromeOptions.setBinary(path + "\\firefox.exe");
+                ChromeDriver chromeDriver = new ChromeDriver(chromeOptions);
+
+            return chromeDriver;
 
             case REMOTE_WEB_DRIVER:
                 WebDriver driver = null;
