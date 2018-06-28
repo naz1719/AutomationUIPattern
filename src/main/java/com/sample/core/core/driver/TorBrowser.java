@@ -2,9 +2,14 @@ package com.sample.core.core.driver;
 
 import com.sample.constants.CommonConsts;
 import com.sample.core.utils.PropertiesLoader;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.interactions.Actions;
 
 import java.io.*;
 
@@ -16,8 +21,9 @@ public class TorBrowser {
         String path = "C:\\Users\\Nazar Khimin\\Downloads\\Tor Browser\\Browser";
 //        System.setProperty("webdriver.gecko.driver", "C:/Users/Jay/Desktop/Tor Browser/geckodriver.exe");
         System.setProperty("webdriver.gecko.driver", "C:\\Users\\Nazar Khimin\\IdeaProjects\\AutomationUI\\web-drivers\\geckodriver.exe");
+
         File torProfileDir = new File("C:\\Users\\Nazar Khimin\\Downloads\\Tor Browser\\Browser\\TorBrowser\\Data\\Browser\\profile.default");
-        FirefoxBinary binary = new FirefoxBinary(new File(path+"\\firefox.exe"));
+        FirefoxBinary binary = new FirefoxBinary(new File(path + "\\firefox.exe"));
 
         FirefoxProfile torProfile = new FirefoxProfile(torProfileDir);
         torProfile.setPreference("webdriver.load.strategy", "unstable");
@@ -31,10 +37,33 @@ public class TorBrowser {
         profile.setPreference("network.proxy.type", 1);
         profile.setPreference("network.proxy.socks", "127.0.0.1");
         profile.setPreference("network.proxy.socks_port", 9150);
-        FirefoxDriver driver = new FirefoxDriver(profile);
+
+        FirefoxOptions options = new FirefoxOptions();
+//        options.setBinary(binary);
+        options.setProfile(profile);
+
+        FirefoxDriver driver = new FirefoxDriver(options);
         Thread.sleep(10000);
-        driver.get("http://www.google.com/");
-        Thread.sleep(5000);
+//        driver.get("http://www.google.com/");
+        driver.get("https://duckduckgo.com/?q=my+ip&t=h_&ia=answer");
+        Thread.sleep(2000);
+//        driver.get("https://www.iplocation.net/find-ip-address");
+//            WebElement webElement = driver.findElement(By.name("q"));
+//            webElement.sendKeys("my ip");
+//            webElement.sendKeys(Keys.ENTER);
+
+        for (int i = 0; i < 3; i++) {
+
+            driver.navigate().refresh();
+            Thread.sleep(100000);
+            WebElement ip = driver.findElement(By.className("zci__body"));
+            String name = ip.getText();
+            System.out.println(name);
+        }
+//        Actions actions = new Actions(driver).sendKeys().sendKeys(Keys.ENTER);
+//        actions.build();
+
+        driver.quit();
         killFirefox();
     }
 
