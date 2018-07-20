@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.restassured.RestAssured;
 import com.jayway.restassured.response.Response;
 import com.sample.parsers.excel.bhv.SampleBhv;
-import etsy.ResponseDto;
-import etsy.Result;
+import com.sample.rest.dto.etsy.ResponseDto;
+import com.sample.rest.dto.etsy.Result;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

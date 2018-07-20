@@ -1,7 +1,7 @@
 package com.sample.parsers.excel.bhv;
 
 import com.sample.parsers.excel.core.BaseExcel;
-import etsy.Result;
+import com.sample.rest.dto.etsy.Result;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;

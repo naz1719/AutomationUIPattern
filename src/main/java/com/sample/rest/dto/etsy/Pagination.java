@@ -1,5 +1,5 @@
 
-package etsy;
+package com.sample.rest.dto.etsy;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
