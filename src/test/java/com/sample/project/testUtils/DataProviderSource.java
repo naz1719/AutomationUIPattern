@@ -14,7 +14,7 @@ public class DataProviderSource {
 
     @DataProvider(name = "webSite", parallel = true)
     public static Object[][] getFileEntry(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
 
         List<Integer> list = IntStream.range(0, 3).boxed().collect(Collectors.toList());
         Object[][] objArray = new Object[list.size()][];

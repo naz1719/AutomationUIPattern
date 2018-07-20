@@ -112,6 +112,10 @@ public class WebDriverManager {
         executeScript("arguments[0].scrollIntoView(false);", el);
     }
 
+    public static void scrollDown() {
+        executeScript("scroll(0, 250);");
+    }
+
     public void makeScreen(String fileName) {
         File file = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
         try {
