@@ -1,4 +1,4 @@
-package com.sample.project;
+package com.sample.rest;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
