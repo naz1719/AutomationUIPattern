@@ -1,13 +1,17 @@
 package com.sample.parsers.excel.bhv;
 
 import com.sample.parsers.excel.core.BaseExcel;
+import etsy.Result;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 
+import java.util.List;
+
 import static com.sample.parsers.excel.utils.CellStyleUtils.getCellSHeaderStyle;
 import static com.sample.constants.CommonConsts.*;
+import static com.sample.parsers.excel.utils.CellStyleUtils.getHyperLinkCellStyle;
 import static com.sample.parsers.excel.utils.CellStyleUtils.getStandardCellStyle;
 
 public class SampleBhv extends BaseBhv {
@@ -15,6 +19,7 @@ public class SampleBhv extends BaseBhv {
     private Sheet sheet = baseExcel.getSheet(SHEET1);
 
     private CellStyle headerStyle = getCellSHeaderStyle(baseExcel);
+    private CellStyle linkStyle = getHyperLinkCellStyle(baseExcel);
 
     private int BEGIN_ROW_CREATED_SHEET = 1;
 
@@ -33,15 +38,15 @@ public class SampleBhv extends BaseBhv {
     }
 
 
-//    public void writeBodyOfCell(List<Blog> list) {
-//        CellStyle cellStyle = getStandardCellStyle(baseExcel);
-//        for (int i = 0; i < list.size(); i++) {
-//            Row row1 = createCustomRow();
-//            writeCell(row1, 0, list.get(i).getTitle(), cellStyle);
-//            writeCell(row1, 1, list.get(i).getURL(), cellStyle);
-//        }
-//        baseExcel.saveChangesToFile();
-//    }
+    public void writeBodyOfCell(List<Result> list) {
+        CellStyle cellStyle = getStandardCellStyle(baseExcel);
+        for (int i = 0; i < list.size(); i++) {
+            Row row1 = createCustomRow();
+            writeCell(row1, 0, list.get(i).getUrl(), linkStyle);
+            writeCell(row1, 1, String.valueOf(list.get(i).getNumFavorers()), cellStyle);
+        }
+        baseExcel.saveChangesToFile();
+    }
 
 
     public Row createCustomRow() {

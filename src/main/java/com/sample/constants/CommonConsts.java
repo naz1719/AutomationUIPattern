@@ -26,7 +26,7 @@ public final class CommonConsts {
 
 
     //    Headers
-    public static List<String> SAMPLE_HEADERS = Arrays.asList("Header", "Header", "Header", "Header");
+    public static List<String> SAMPLE_HEADERS = Arrays.asList("URL", "Number of favourites", "Top 100");
 
     public CommonConsts() {
     }
