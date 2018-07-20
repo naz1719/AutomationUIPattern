@@ -20,10 +20,12 @@ public class RestCall {
     public static final String endpoint = "https://openapi.etsy.com/v2/listings/active.js";
     public static final String keywords = "dog collars";
     public static final String limit = "100";
-    public static final String apikey = "3r7fxltznu2w09hlujrcxyzw";
+//    public static final String apikey = "3r7fxltznu2w09hlujrcxyzw";
+    public static final String apikey = "cy6fzjs6b45zzmgeny0vkztv";
 
 
     public static void main(String[] args) throws Exception {
+
         SampleBhv sampleBhv = new SampleBhv();
 
         Integer offset = 0;
@@ -33,7 +35,7 @@ public class RestCall {
         List<Result> list = new ArrayList<>(getResponse.getResults());
         System.out.println("Item count per call " + list.size());
 
-        while (offset < getResponse.getCount()) {
+        while (offset < 14000) {
             System.out.println("Iteration , offset " + offset);
             offset = offset + 100;
             ResponseDto getResponse1 = getResponseDto(endpoint, keywords, limit, apikey, String.valueOf(offset));
@@ -60,18 +62,12 @@ public class RestCall {
         File file2 = new File("sorted.txt");
         FileUtils.writeStringToFile(file2, jsonInString);
 
-        List<Result> top10 = new ArrayList<>(list.subList(list.size() - 10, list.size()));
+        List<Result> top10 = new ArrayList<>(list.subList(list.size() - 100, list.size()));
         Collections.sort(top10, Collections.reverseOrder());
 
 //        Excel writer
         sampleBhv.writeHeaders();
         sampleBhv.writeBodyOfCell(top10);
-
-//        Parsing
-
-//        System.out.println(getResponse.getResults().get(0).getTitle());
-//        System.out.println(getResponse.getResults().get(0).getUrl());
-//        System.out.println(getResponse.getResults().get(0).getNumFavorers());
 
     }
 
