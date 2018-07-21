@@ -16,9 +16,7 @@ import java.lang.reflect.Method;
 public abstract class BaseTestClass {
 
     protected WaitManager waitManager = new WaitManager();
-
     protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
-
     protected TestLogger LOG;
 
     @BeforeClass

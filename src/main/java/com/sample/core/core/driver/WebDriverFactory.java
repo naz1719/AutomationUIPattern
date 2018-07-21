@@ -19,6 +19,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
+import static com.sample.project.dataprovider.DataProviderSource.PROXY;
+
 
 public class WebDriverFactory {
 
@@ -98,8 +100,12 @@ public class WebDriverFactory {
                 UnexpectedAlertBehaviour.ACCEPT);
         chromeCapabilities.setCapability("browserConnectionEnabled", true);
 
+
         ChromeOptions chromeOptions = new ChromeOptions();
+        // Add the WebDriver proxy capability.
+
         chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--proxy-server="+PROXY);
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;
     }
