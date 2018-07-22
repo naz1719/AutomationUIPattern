@@ -1,9 +1,9 @@
 package com.sample.rest.utils.env;
 
 
+import com.sample.rest.utils.CustomUtils;
+import com.sample.rest.utils.PropertyUtils;
 import org.apache.commons.lang3.text.StrSubstitutor;
-import utils.CustomUtils;
-import utils.PropertyUtils;
 
 import java.io.File;
 import java.io.FileReader;

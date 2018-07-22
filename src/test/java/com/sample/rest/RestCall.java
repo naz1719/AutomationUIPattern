@@ -18,7 +18,7 @@ import java.util.List;
 public class RestCall {
 
     public static final String endpoint = "https://openapi.etsy.com/v2/listings/active.js";
-    public static final String keywords = "dog collars";
+    public static final String keywords = "dog beds";
     public static final String limit = "100";
 //    public static final String apikey = "3r7fxltznu2w09hlujrcxyzw";
     public static final String apikey = "cy6fzjs6b45zzmgeny0vkztv";

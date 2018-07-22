@@ -1,7 +1,7 @@
 package com.sample.rest.utils.env;
 
-import log.AllureLogger;
-import utils.CustomUtils;
+import com.sample.rest.log.AllureLogger;
+import com.sample.rest.utils.CustomUtils;
 
 import java.io.File;
 import java.io.FileReader;
