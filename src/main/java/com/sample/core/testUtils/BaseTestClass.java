@@ -32,7 +32,7 @@ public abstract class BaseTestClass {
     @BeforeMethod
     public void beforeMethod(Method method) {
         LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
-        createInstance();
+//        createInstance();
     }
 
     @AfterMethod

@@ -15,7 +15,6 @@ public abstract class BaseBO {
     }
 
     public void openPortal(String url) {
-        step("Go to "+url);
         WebDriverManager.getUrl(url);
     }
 

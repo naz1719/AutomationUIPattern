@@ -8,8 +8,10 @@ public final class CommonConsts {
     public static final String ESCAPE_PROPERTY = "org.uncommons.reportng.escape-output";
 
     //    URL constants
-    public static final String WEB_SITE_URL = "https://www.google.com.ua/";
+    public static final String MY_IP = "https://www.myip.com/";
+    public static final String GOOGLE = "https://www.google.com.ua/";
 
+    public static String PROXY ="0";
 
     public static String ZERO = "0";
 

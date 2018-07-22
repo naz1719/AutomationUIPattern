@@ -4,14 +4,29 @@ package com.sample.project.po;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.List;
+
 public class FrontPO extends BasePO {
 
-    @FindBy(id = "item_tcm:64-1112-2")
-    private WebElement buildingBlocks;
+    @FindBy(xpath = ".//*[@id='ip']")
+    private WebElement ip;
 
+    @FindBy(xpath = ".//*[@class='r']/a")
+    private List<WebElement> results;
 
-    public void act_clickBuildingBlocks() {
-         buildingBlocks.click();
+    @FindBy(xpath = ".//a")
+    private List<WebElement> hrefs;
+
+    public List<WebElement> getResults() {
+        return results;
+    }
+
+    public List<WebElement> getHrefs() {
+        return hrefs;
+    }
+
+    public String getMyIp() {
+        return ip.getText();
     }
 
 }

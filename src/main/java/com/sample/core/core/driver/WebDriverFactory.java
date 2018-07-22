@@ -1,6 +1,7 @@
 package com.sample.core.core.driver;
 
 import com.sample.constants.CommonConsts;
+import com.sample.core.testUtils.TestLogger;
 import com.sample.core.utils.PropertiesLoader;
 import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
@@ -19,11 +20,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
-import static com.sample.project.dataprovider.DataProviderSource.PROXY;
+import static com.sample.constants.CommonConsts.PROXY;
 
 
 public class WebDriverFactory {
-
+    private static final TestLogger LOG = TestLogger.getLogger();
     protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
 
 
@@ -46,6 +47,7 @@ public class WebDriverFactory {
                 System.setProperty("webdriver.chrome.driver",
                         propertiesLoader.getChromeDriverPath());
                 WebDriver chrome = new ChromeDriver(getChromeCapabilities());
+
                 chrome.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 return chrome;
 
@@ -103,9 +105,14 @@ public class WebDriverFactory {
 
         ChromeOptions chromeOptions = new ChromeOptions();
         // Add the WebDriver proxy capability.
-
         chromeOptions.addArguments("--no-sandbox");
-        chromeOptions.addArguments("--proxy-server="+PROXY);
+//        chromeOptions.addArguments("--proxy-server=" + PROXY);
+        chromeOptions.addArguments("--start-maximized");
+
+//        String PROFILE_PATH = "C:\\Users\\Nazar Khimin\\AppData\\Local\\Google\\Chrome\\User Data\\Default";
+//        chromeOptions.addArguments("--user-data-dir=" + PROFILE_PATH);
+        LOG.info("Proxy :" + PROXY);
+
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;
     }

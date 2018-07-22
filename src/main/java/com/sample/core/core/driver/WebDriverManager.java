@@ -104,6 +104,10 @@ public class WebDriverManager {
         return ((JavascriptExecutor) getDriver()).executeScript(script, args);
     }
 
+    public static void scrollDown() {
+        executeScript("scroll(0, 250);");
+    }
+
     public static void highlightElement(WebElement elem) {
         executeScript("arguments[0].style.border='1px solid red'", elem);
     }

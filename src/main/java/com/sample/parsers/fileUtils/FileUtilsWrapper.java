@@ -19,17 +19,6 @@ public class FileUtilsWrapper {
     public static void saveFileFromUrlWithCommonsIO(String url, String fileName) throws MalformedURLException, IOException {
         org.apache.commons.io.FileUtils.copyURLToFile(new URL(url), new File(fileName));
     }
-    public void writeLineToFile(List<String> list, String path) {
-        list.forEach(name -> {
-            Path p = Paths.get(path + "\\" + name);
-            String s = System.lineSeparator() + "\nauth-user-pass auth.txt";
-            try {
-                Files.write(p, s.getBytes(), StandardOpenOption.APPEND);
-            } catch (IOException e) {
-                System.err.println(e);
-            }
-        });
-    }
 
     public static boolean isStream(String input) {
         final Pattern pattern = Pattern.compile("([a-zA-Z0-9]+)-([a-zA-Z0-9]+)");
@@ -37,10 +26,24 @@ public class FileUtilsWrapper {
         return matcher.matches();
     }
 
+    public static void main(String[] args) {
+        String proxy = "185.101.238.21:1080";
+        System.out.println(getIp(proxy));
+    }
+
     public static boolean getExcelFilesList(String input) {
         final Pattern pattern = Pattern.compile("(.*)(.(xlsx|xlx|xls))");
         final Matcher matcher = pattern.matcher(input);
         return matcher.matches();
+    }
+
+     public static String getIp(String input) {
+        final Pattern pattern = Pattern.compile("^.*(?=(:))");
+        final Matcher matcher = pattern.matcher(input);
+        if(matcher.find()){
+            return matcher.group();
+        }
+        return "No";
     }
 
     public static String getExcel() {
@@ -118,6 +121,18 @@ public class FileUtilsWrapper {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void writeLineToFile(List<String> list, String path) {
+        list.forEach(name -> {
+            Path p = Paths.get(path + "\\" + name);
+            String s = System.lineSeparator() + "\nauth-user-pass auth.txt";
+            try {
+                Files.write(p, s.getBytes(), StandardOpenOption.APPEND);
+            } catch (IOException e) {
+                System.err.println(e);
+            }
+        });
     }
 
 //      String str = a.replaceAll("[<|>|:|\"|/|\\\\|\\||?]|\\*", "_");

@@ -16,14 +16,11 @@ import java.util.stream.IntStream;
 
 public class DataProviderSource {
 
-    public static String PROXY ="85.185.238.214:8080";
-
-    @DataProvider(name = "webSite", parallel = true)
+    @DataProvider(name = "webSite")
     public static Object[][] getFileEntry(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
 
         List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
-
         Object[][] objArray = new Object[list.size()][];
         for (int i = 0; i < list.size(); i++) {
             objArray[i] = new Object[1];

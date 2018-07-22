@@ -1,9 +1,10 @@
 package com.sample.rest.utils.env.general;
 
 
-import utils.env.EnvPropertyHolder;
-import utils.env.EnvUtil;
-import utils.env.PropertiesMap;
+
+import com.sample.rest.utils.env.EnvPropertyHolder;
+import com.sample.rest.utils.env.EnvUtil;
+import com.sample.rest.utils.env.PropertiesMap;
 
 import java.util.Map;
 
