@@ -14,16 +14,16 @@ public class FrontPO extends BasePO {
     @FindBy(xpath = ".//*[@class='r']/a")
     private List<WebElement> results;
 
-    @FindBy(xpath = ".//a")
-    private List<WebElement> hrefs;
+//    @FindBy(xpath = ".//a")
+//    private List<WebElement> hrefs;
 
     public List<WebElement> getResults() {
         return results;
     }
 
-    public List<WebElement> getHrefs() {
-        return hrefs;
-    }
+//    public List<WebElement> getHrefs() {
+//        return hrefs;
+//    }
 
     public String getMyIp() {
         return ip.getText();

@@ -105,9 +105,17 @@ public class WebDriverManager {
     }
 
     public static void scrollDown() {
-        executeScript("scroll(0, 250);");
+        LOG.info("Scroll down");
+        executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
-
+    public static void scrollUp() {
+        LOG.info("Scroll up");
+        executeScript("window.scrollBy(0,-250)", "");
+    }
+    public static void clickByJS(WebElement element) {
+        LOG.info("Click by js");
+        executeScript("arguments[0].click();", element);
+    }
     public static void highlightElement(WebElement elem) {
         executeScript("arguments[0].style.border='1px solid red'", elem);
     }

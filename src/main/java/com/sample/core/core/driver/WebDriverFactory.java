@@ -111,7 +111,7 @@ public class WebDriverFactory {
 
 //        String PROFILE_PATH = "C:\\Users\\Nazar Khimin\\AppData\\Local\\Google\\Chrome\\User Data\\Default";
 //        chromeOptions.addArguments("--user-data-dir=" + PROFILE_PATH);
-        LOG.info("Proxy :" + PROXY);
+//        LOG.info("Proxy :" + PROXY);
 
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;

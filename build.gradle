@@ -72,7 +72,7 @@ clean.doFirst{
 
 tasks.withType(Test) {
 //    clean output of the test
-    outputs.upToDateWhen { false }
+//    outputs.upToDateWhen { false }
     useTestNG() {
         outputDirectory = file("$project.buildDir//testng-output")
         useDefaultListeners = true
