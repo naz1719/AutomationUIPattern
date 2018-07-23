@@ -47,7 +47,6 @@ public class WebDriverFactory {
                 System.setProperty("webdriver.chrome.driver",
                         propertiesLoader.getChromeDriverPath());
                 WebDriver chrome = new ChromeDriver(getChromeCapabilities());
-
                 chrome.manage().timeouts().implicitlyWait(propertiesLoader.getImplicitlyWaitTimeout(), TimeUnit.SECONDS);
                 return chrome;
 
@@ -101,6 +100,10 @@ public class WebDriverFactory {
         chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
                 UnexpectedAlertBehaviour.ACCEPT);
         chromeCapabilities.setCapability("browserConnectionEnabled", true);
+
+//        chromeCapabilities.setPlatform();
+//        chromeCapabilities.setBrowserName();
+//        chromeCapabilities.setVersion();
 
 
         ChromeOptions chromeOptions = new ChromeOptions();
