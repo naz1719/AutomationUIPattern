@@ -24,7 +24,7 @@ public class WebDriverManager {
     }
 
     private static WebDriver createAndGetDriver() {
-        LOG.info("Starting new browser instance");
+//        LOG.info("Starting new browser instance");
         WebDriver driver = webDriverFactory.getDriverInstance();
         pool.set(driver);
         return driver;
@@ -32,7 +32,7 @@ public class WebDriverManager {
 
     public static void stop() {
         WebDriver driver = getDriver();
-        LOG.info("Stopping browser.");
+//        LOG.info("Stopping browser.");
         try {
             for (String handle : driver.getWindowHandles()) {
                 driver.switchTo().window(handle);
@@ -105,15 +105,12 @@ public class WebDriverManager {
     }
 
     public static void scrollDown() {
-        LOG.info("Scroll down");
         executeScript("window.scrollBy(0,document.body.scrollHeight)");
     }
     public static void scrollUp() {
-        LOG.info("Scroll up");
         executeScript("window.scrollBy(0,-250)", "");
     }
     public static void clickByJS(WebElement element) {
-        LOG.info("Click by js");
         executeScript("arguments[0].click();", element);
     }
     public static void highlightElement(WebElement elem) {

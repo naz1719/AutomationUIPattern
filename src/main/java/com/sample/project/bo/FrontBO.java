@@ -21,17 +21,22 @@ public class FrontBO extends BaseBO {
         return browerIp;
     }
 
-    public void logic() {
-        if (frontPO.getResults().size() > 0) {
-            WebElement element = frontPO.getResults().get(0);
+
+    public void logic(String host, String searchWord) {
+        List<WebElement> elementList = frontPO.getResults(host);
+        if (elementList.size() > 0) {
+            WebElement element = frontPO.getResults(host).get(0);
             waitManager.fluentElementWait(element);
             WebDriverManager.clickByJS(element);
+        } else {
+            step("Not found site " + host + " with search word " + searchWord);
         }
         WaitManager.sleepTimeOut(5000);
         WebDriverManager.scrollDown();
         WaitManager.sleepTimeOut(2000);
         WebDriverManager.scrollUp();
         String url = WebDriverManager.getDriver().getCurrentUrl();
+        step("Search by :" + searchWord + " and we are on " + url);
 //        List<WebElement> webElementList = WebDriverManager.getDriver().findElements(By.xpath(".//a[contains(@href,'" + url + "')]"));
         List<WebElement> webElementList = WebDriverManager.getDriver().findElements(By.xpath(".//a"));
         if (webElementList.size() > 0) {

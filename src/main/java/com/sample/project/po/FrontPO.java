@@ -1,6 +1,9 @@
 package com.sample.project.po;
 
 
+import com.sample.core.core.driver.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
@@ -11,19 +14,13 @@ public class FrontPO extends BasePO {
     @FindBy(xpath = ".//*[@id='ip']")
     private WebElement ip;
 
-    @FindBy(xpath = ".//*[@class='r']/a")
-    private List<WebElement> results;
 
 //    @FindBy(xpath = ".//a")
 //    private List<WebElement> hrefs;
 
-    public List<WebElement> getResults() {
-        return results;
+    public List<WebElement> getResults(String s) {
+        return WebDriverManager.getDriver().findElements(By.xpath(".//*[@class='r']/a[contains(@href,'" + s + "')]"));
     }
-
-//    public List<WebElement> getHrefs() {
-//        return hrefs;
-//    }
 
     public String getMyIp() {
         return ip.getText();
