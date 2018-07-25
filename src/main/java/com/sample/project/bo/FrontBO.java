@@ -22,7 +22,7 @@ public class FrontBO extends BaseBO {
     }
 
 
-    public void logic(String host, String searchWord) {
+    public void logic(String host, String searchWord, int millisecond) {
         List<WebElement> elementList = frontPO.getResults(host);
         if (elementList.size() > 0) {
             WebElement element = frontPO.getResults(host).get(0);
@@ -31,7 +31,7 @@ public class FrontBO extends BaseBO {
         } else {
             step("Not found site " + host + " with search word " + searchWord);
         }
-        WaitManager.sleepTimeOut(5000);
+        WaitManager.sleepTimeOut(millisecond);
         WebDriverManager.scrollDown();
         WaitManager.sleepTimeOut(2000);
         WebDriverManager.scrollUp();

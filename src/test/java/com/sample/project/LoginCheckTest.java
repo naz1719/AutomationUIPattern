@@ -10,6 +10,9 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static com.sample.constants.CommonConsts.GOOGLE;
@@ -29,7 +32,18 @@ public class LoginCheckTest extends BaseTestClass {
         waitManager.waitForPageToBeReady();
 
         long startTime = System.currentTimeMillis();
-        frontBO.logic(proxyDto.getHost(), proxyDto.getKeyword());
+
+//         Randomizer
+        List<Integer> list = new ArrayList<>();
+        list.add(4000);
+        list.add(6000);
+        list.add(10000);
+        list.add(12000);
+
+        Random randomizer = new Random();
+        Integer random = list.get(randomizer.nextInt(list.size()));
+
+        frontBO.logic(proxyDto.getHost(), proxyDto.getKeyword(), random);
 
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
