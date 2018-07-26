@@ -1,4 +1,2 @@
 keyword,https://moz.com
-keyword,https://moz.com
-keyword,https://moz.com
 

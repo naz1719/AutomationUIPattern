@@ -96,6 +96,7 @@ public class WebDriverFactory {
 
     private DesiredCapabilities getChromeCapabilities() {
         DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
+
         chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
         chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
                 UnexpectedAlertBehaviour.ACCEPT);
@@ -109,13 +110,16 @@ public class WebDriverFactory {
         ChromeOptions chromeOptions = new ChromeOptions();
         // Add the WebDriver proxy capability.
         chromeOptions.addArguments("--no-sandbox");
-//        chromeOptions.addArguments("--proxy-server=" + PROXY);
+        String firefoxWindowsAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+        String chromeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
+        String operaWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36 OPR/15.0.1147.100";
+        String IEWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
+        String EdgeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
+
+        String userAgent = operaWindows;
+        chromeOptions.addArguments("--user-agent=" + userAgent);
+        //        chromeOptions.addArguments("--proxy-server=" + PROXY);
         chromeOptions.addArguments("--start-maximized");
-
-//        String PROFILE_PATH = "C:\\Users\\Nazar Khimin\\AppData\\Local\\Google\\Chrome\\User Data\\Default";
-//        chromeOptions.addArguments("--user-data-dir=" + PROFILE_PATH);
-//        LOG.info("Proxy :" + PROXY);
-
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;
     }
@@ -129,10 +133,10 @@ public class WebDriverFactory {
 
     private DesiredCapabilities getInternetExplorerCapabilities() {
         DesiredCapabilities internetExplorerCapabilities = DesiredCapabilities.internetExplorer();
-        internetExplorerCapabilities.setCapability("webdriver.ie.version", "11");
-        internetExplorerCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        internetExplorerCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
-        internetExplorerCapabilities.setCapability("ignoreProtectedModeSettings", true);
+//        internetExplorerCapabilities.setCapability("webdriver.ie.version", "11");
+//        internetExplorerCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//        internetExplorerCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR, UnexpectedAlertBehaviour.IGNORE);
+//        internetExplorerCapabilities.setCapability("ignoreProtectedModeSettings", true);
         return internetExplorerCapabilities;
     }
 }

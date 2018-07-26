@@ -37,8 +37,8 @@ public class LoginCheckTest extends BaseTestClass {
         List<Integer> list = new ArrayList<>();
         list.add(4000);
         list.add(6000);
-        list.add(10000);
-        list.add(12000);
+//        list.add(10000);
+//        list.add(12000);
 
         Random randomizer = new Random();
         Integer random = list.get(randomizer.nextInt(list.size()));
@@ -51,11 +51,6 @@ public class LoginCheckTest extends BaseTestClass {
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));
-
-//        List<Integer> list = new ArrayList<>();
-//        Random randomizer = new Random();
-//        Integer random = list.get(randomizer.nextInt(list.size()));
-//        WaitManager.waitTimeOut(random);
 
     }
 }
