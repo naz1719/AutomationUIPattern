@@ -3,7 +3,6 @@ package com.sample.core.core.driver;
 import com.sample.constants.CommonConsts;
 import com.sample.core.testUtils.TestLogger;
 import com.sample.core.utils.PropertiesLoader;
-import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -12,7 +11,6 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -21,6 +19,7 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import static com.sample.constants.CommonConsts.PROXY;
+import static com.sample.constants.CommonConsts.ZERO;
 
 
 public class WebDriverFactory {
@@ -97,16 +96,11 @@ public class WebDriverFactory {
     private DesiredCapabilities getChromeCapabilities() {
         DesiredCapabilities chromeCapabilities = DesiredCapabilities.chrome();
 
-        chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-        chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
-                UnexpectedAlertBehaviour.ACCEPT);
-        chromeCapabilities.setCapability("browserConnectionEnabled", true);
-
-//        chromeCapabilities.setPlatform();
-//        chromeCapabilities.setBrowserName();
-//        chromeCapabilities.setVersion();
-
-
+//        chromeCapabilities.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
+//        chromeCapabilities.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
+//                UnexpectedAlertBehaviour.ACCEPT);
+//        chromeCapabilities.setCapability("browserConnectionEnabled", true);
+//
         ChromeOptions chromeOptions = new ChromeOptions();
         // Add the WebDriver proxy capability.
         chromeOptions.addArguments("--no-sandbox");
@@ -118,7 +112,9 @@ public class WebDriverFactory {
 
         String userAgent = operaWindows;
         chromeOptions.addArguments("--user-agent=" + userAgent);
-        //        chromeOptions.addArguments("--proxy-server=" + PROXY);
+        if (!PROXY.equals(ZERO)) {
+            chromeOptions.addArguments("--proxy-server=" + PROXY);
+        }
         chromeOptions.addArguments("--start-maximized");
         chromeCapabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
         return chromeCapabilities;

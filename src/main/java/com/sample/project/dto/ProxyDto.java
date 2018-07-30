@@ -3,6 +3,15 @@ package com.sample.project.dto;
 public class ProxyDto {
     private String keyword;
     private String host;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public String getKeyword() {
         return keyword;

@@ -12,7 +12,6 @@ public final class CommonConsts {
     public static final String GOOGLE = "https://www.google.com.ua/";
 
     public static String PROXY ="0";
-
     public static String ZERO = "0";
 
 

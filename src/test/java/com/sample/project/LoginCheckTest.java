@@ -8,6 +8,7 @@ import com.sample.project.dto.ProxyDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
@@ -16,11 +17,20 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import static com.sample.constants.CommonConsts.GOOGLE;
+import static com.sample.constants.CommonConsts.PROXY;
 
 public class LoginCheckTest extends BaseTestClass {
 
+    private String localProxy;
+
+    @Factory(dataProviderClass = DataProviderSource.class, dataProvider = "proxyList")
+    public LoginCheckTest(String localProxy) {
+        this.localProxy = localProxy;
+    }
+
     @Test(skipFailedInvocations = true, dataProviderClass = DataProviderSource.class, dataProvider = "search")
     public void testCheckLogin(ProxyDto proxyDto) {
+        PROXY = localProxy;
         FrontBO frontBO = new FrontBO();
         frontBO.openPortal(GOOGLE);
         WebElement webElement = WebDriverManager.getDriver().findElement(By.name("q"));
@@ -51,6 +61,6 @@ public class LoginCheckTest extends BaseTestClass {
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));
-
+        PROXY = "0";
     }
 }

@@ -18,10 +18,9 @@ import java.util.stream.IntStream;
 
 
 public class DataProviderSource {
-
-    @DataProvider(name = "webSite")
-    public static Object[][] getFileEntry(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
+    @DataProvider(name = "proxyList")
+    public static Object[][] getProxy(ITestContext context) throws IOException, JAXBException {
+//        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(3);
 
         List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
         Object[][] objArray = new Object[list.size()][];
@@ -32,9 +31,10 @@ public class DataProviderSource {
         return objArray;
     }
 
-    @DataProvider(name = "search")
+
+    @DataProvider(name = "search", parallel = true)
     public static Object[][] getSearchWord(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(3);
 
         List<String> list = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
 
@@ -46,6 +46,7 @@ public class DataProviderSource {
             List<String> stringList = Arrays.asList(string.split(","));
             proxyDtoList.add(new ProxyDto(stringList.get(0), stringList.get(1)));
         }
+
 
         Object[][] objArray = new Object[proxyDtoList.size()][];
         for (int i = 0; i < proxyDtoList.size(); i++) {
