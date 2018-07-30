@@ -40,7 +40,10 @@ public class FrontBO extends BaseBO {
             }
         }
 
+
+        WebDriverManager.getDriver().switchTo().parentFrame();
         List<WebElement> elementList = frontPO.getResults(host);
+
         if (elementList.size() > 0) {
             WebElement element = frontPO.getResults(host).get(0);
             waitManager.fluentElementWait(element);
