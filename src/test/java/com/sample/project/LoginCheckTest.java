@@ -8,11 +8,13 @@ import com.sample.project.dto.ProxyDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -29,17 +31,23 @@ public class LoginCheckTest extends BaseTestClass {
     }
 
     @Test(skipFailedInvocations = true, dataProviderClass = DataProviderSource.class, dataProvider = "search")
-    public void testCheckLogin(ProxyDto proxyDto) {
+    public void testCheckLogin(ProxyDto proxyDto) throws Exception {
         PROXY = localProxy;
         FrontBO frontBO = new FrontBO();
         frontBO.openPortal(GOOGLE);
-        WebElement webElement = WebDriverManager.getDriver().findElement(By.name("q"));
+        WebElement webElement = null;
+        try {
+            webElement = WebDriverManager.getDriver().findElement(By.name("q"));
+        } catch (Exception e) {
+            step("The Chrome with ip"+ PROXY+"  not loaded");
+            Assert.fail("The Chrome with ip"+ PROXY+"  not loaded");
+        }
+
         waitManager.fluentElementWait(webElement);
 
-        step("Search by " + proxyDto.getKeyword());
+        step("Info: Search by " + proxyDto.getKeyword());
         webElement.sendKeys(proxyDto.getKeyword());
         webElement.sendKeys(Keys.ENTER);
-        waitManager.waitForPageToBeReady();
 
         long startTime = System.currentTimeMillis();
 

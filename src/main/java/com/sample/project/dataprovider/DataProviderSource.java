@@ -34,7 +34,7 @@ public class DataProviderSource {
 
     @DataProvider(name = "search", parallel = true)
     public static Object[][] getSearchWord(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(3);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
 
         List<String> list = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
 

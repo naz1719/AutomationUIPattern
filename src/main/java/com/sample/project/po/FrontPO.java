@@ -14,8 +14,14 @@ public class FrontPO extends BasePO {
     @FindBy(xpath = ".//*[@id='ip']")
     private WebElement ip;
 
+    @FindBy(xpath = ".//*[@class='rc-anchor rc-anchor-normal rc-anchor-light']")
+    private List<WebElement> captcha;
 
-//    @FindBy(xpath = ".//a")
+    public List<WebElement> getCaptcha() {
+        return captcha;
+    }
+
+    //    @FindBy(xpath = ".//a")
 //    private List<WebElement> hrefs;
 
     public List<WebElement> getResults(String s) {
