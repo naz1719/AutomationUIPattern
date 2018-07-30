@@ -19,7 +19,7 @@ public class TestLogger {
         String fileName =String.format("%s\\testUtils-output\\logs\\%s\\%s.log", System.getProperty("user.dir"), className, testName);
         fileAppender.setFile(fileName);
         fileAppender.setLayout(new PatternLayout("[%-5p] %d{HH:mm:ss} %c: %m%n"));
-        fileAppender.setAppend(false);
+        fileAppender.setAppend(true);
         fileAppender.setName("FileAppender");
         fileAppender.setThreshold(Level.DEBUG);
         fileAppender.activateOptions();

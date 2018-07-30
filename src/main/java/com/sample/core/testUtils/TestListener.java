@@ -2,6 +2,7 @@ package com.sample.core.testUtils;
 
 import com.sample.core.core.driver.WebDriverManager;
 import io.qameta.allure.Attachment;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
@@ -10,6 +11,7 @@ import org.testng.ITestResult;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
@@ -22,13 +24,14 @@ public class TestListener implements ITestListener {
         testName = iTestResult.getName().split(" ")[0];
         className = iTestResult.getTestClass().getRealClass().getSimpleName();
         LOG = TestLogger.getLogger(testName, className);
-        LOG.info("Start...");
+//        LOG.info("Start...");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         LOG.info(" [PASSED]");
         File file = new File(String.format("%s/testUtils-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
+
         attachLog(file);
     }
 

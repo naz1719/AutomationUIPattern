@@ -45,7 +45,7 @@ public class WebDriverManager {
             removeDriverFromDriverPool();
         }
 
-        LOG.info("Browser has been stopped.");
+//        LOG.info("Browser has been stopped.");
     }
 
     public static void load(String path) {

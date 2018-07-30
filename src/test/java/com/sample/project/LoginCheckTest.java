@@ -39,13 +39,18 @@ public class LoginCheckTest extends BaseTestClass {
         try {
             webElement = WebDriverManager.getDriver().findElement(By.name("q"));
         } catch (Exception e) {
-            step("The Chrome with ip"+ PROXY+"  not loaded");
-            Assert.fail("The Chrome with ip"+ PROXY+"  not loaded");
+            WebDriverManager.refresh();
+            try {
+                webElement = WebDriverManager.getDriver().findElement(By.name("q"));
+            } catch (Exception e2) {
+                step("The Chrome with ip " + PROXY + "  not loaded");
+                Assert.fail("The Chrome with ip" + PROXY + "  not loaded");
+            }
         }
 
         waitManager.fluentElementWait(webElement);
 
-        step("Info: Search by " + proxyDto.getKeyword());
+        step("Info: Search by '" + proxyDto.getKeyword() + "'");
         webElement.sendKeys(proxyDto.getKeyword());
         webElement.sendKeys(Keys.ENTER);
 
