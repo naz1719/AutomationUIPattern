@@ -4,6 +4,7 @@ import com.sample.core.core.driver.WebDriverManager;
 import com.sample.core.testUtils.BaseTestClass;
 import com.sample.project.bo.FrontBO;
 import com.sample.project.dataprovider.DataProviderSource;
+import com.sample.project.dto.ProxyBrowserDto;
 import com.sample.project.dto.ProxyDto;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -14,25 +15,39 @@ import org.testng.annotations.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.sample.constants.CommonConsts.GOOGLE;
-import static com.sample.constants.CommonConsts.PROXY;
+import static com.sample.constants.CommonConsts.*;
+import static com.sample.constants.CommonConsts.EdgeWindows;
 
 public class LoginCheckTest extends BaseTestClass {
 
-    private String localProxy;
+    private ProxyBrowserDto localProxy;
 
     @Factory(dataProviderClass = DataProviderSource.class, dataProvider = "proxyList")
-    public LoginCheckTest(String localProxy) {
+    public LoginCheckTest(ProxyBrowserDto localProxy) {
         this.localProxy = localProxy;
     }
 
     @Test(skipFailedInvocations = true, dataProviderClass = DataProviderSource.class, dataProvider = "search")
     public void testCheckLogin(ProxyDto proxyDto) throws Exception {
-        PROXY = localProxy;
+
+        PROXY = localProxy.getProxy();
+        USER_AGENT = localProxy.getBrowser();
+
+        if (USER_AGENT.equals(firefoxWindowsAgent)) {
+            LOG.info("Current User-agent are firefox");
+        } else if (USER_AGENT.equals(chromeWindows)) {
+            LOG.info("Current User-agent are Chrome");
+        } else if (USER_AGENT.equals(operaWindows)) {
+            LOG.info("Current User-agent are Opera");
+        } else if (USER_AGENT.equals(IEWindows)) {
+            LOG.info("Current User-agent are IE");
+        } else if (USER_AGENT.equals(EdgeWindows)) {
+            LOG.info("Current User-agent are EDGE");
+        }
+
         FrontBO frontBO = new FrontBO();
         frontBO.openPortal(GOOGLE);
         WebElement webElement = null;
@@ -58,8 +73,8 @@ public class LoginCheckTest extends BaseTestClass {
 
 //         Randomizer
         List<Integer> list = new ArrayList<>();
-        list.add(4000);
-        list.add(6000);
+        list.add(50000);
+        list.add(30000);
 //        list.add(10000);
 //        list.add(12000);
 
@@ -70,7 +85,7 @@ public class LoginCheckTest extends BaseTestClass {
 
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
-        step(String.format("%02d min, %02d sec",
+        step(String.format("All time one site - %02d min, %02d sec",
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));

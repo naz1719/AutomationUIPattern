@@ -21,8 +21,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import static com.sample.constants.CommonConsts.PROXY;
-import static com.sample.constants.CommonConsts.ZERO;
+import static com.sample.constants.CommonConsts.*;
 
 
 public class WebDriverFactory {
@@ -107,22 +106,8 @@ public class WebDriverFactory {
         ChromeOptions chromeOptions = new ChromeOptions();
         // Add the WebDriver proxy capability.
         chromeOptions.addArguments("--no-sandbox");
-        String firefoxWindowsAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
-        String chromeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
-        String operaWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36 OPR/15.0.1147.100";
-        String IEWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
-        String EdgeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
-        List<String> list = new ArrayList<>();
-        list.add(firefoxWindowsAgent);
-        list.add(chromeWindows);
-        list.add(operaWindows);
-        list.add(IEWindows);
-        list.add(EdgeWindows);
-
-
-        String userAgent = list.get(anyItem(list.size()));
-        chromeOptions.addArguments("--user-agent=" + userAgent);
+        chromeOptions.addArguments("--user-agent=" + USER_AGENT);
         if (!PROXY.equals(ZERO)) {
             chromeOptions.addArguments("--proxy-server=" + PROXY);
         }

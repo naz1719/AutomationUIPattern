@@ -12,6 +12,7 @@ public final class CommonConsts {
     public static final String GOOGLE = "https://www.google.com.ua/";
 
     public static String PROXY ="0";
+    public static String USER_AGENT ="0";
     public static String ZERO = "0";
 
 
@@ -24,6 +25,11 @@ public final class CommonConsts {
     public static final String SHEET1 = "Sheet1";
     public static String FILE_PATH = "file.xlsx";
 
+    public static final String firefoxWindowsAgent = "Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:47.0) Gecko/20100101 Firefox/47.0";
+    public static final String chromeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/60.0.3112.113 Safari/537.36";
+    public static final String operaWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.52 Safari/537.36 OPR/15.0.1147.100";
+    public static final String IEWindows = "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko";
+    public static final String EdgeWindows = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.79 Safari/537.36 Edge/14.14393";
 
 
     //    Headers
