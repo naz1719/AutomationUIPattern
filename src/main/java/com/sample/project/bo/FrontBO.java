@@ -54,9 +54,6 @@ public class FrontBO extends BaseBO {
             WebDriverManager.scrollDown();
             WaitManager.sleepTimeOut(2000);
             WebDriverManager.scrollUp();
-            String url = WebDriverManager.getDriver().getCurrentUrl();
-            step("Search by : '" + searchWord + "' and we are on " + url);
-//        List<WebElement> webElementList = WebDriverManager.getDriver().findElements(By.xpath(".//a[contains(@href,'" + url + "')]"));
             List<WebElement> webElementList = WebDriverManager.getDriver().findElements(By.xpath(".//a"));
             if (webElementList.size() > 0) {
                 WebElement e = webElementList.get(0);

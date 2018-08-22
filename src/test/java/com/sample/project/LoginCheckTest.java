@@ -36,16 +36,17 @@ public class LoginCheckTest extends BaseTestClass {
         PROXY = localProxy.getProxy();
         USER_AGENT = localProxy.getBrowser();
 
+        String proxyInfo = "  Proxy :" + PROXY;
         if (USER_AGENT.equals(firefoxWindowsAgent)) {
-            LOG.info("Current User-agent are firefox");
+            LOG.info("Current User-agent are firefox" + proxyInfo);
         } else if (USER_AGENT.equals(chromeWindows)) {
-            LOG.info("Current User-agent are Chrome");
+            LOG.info("Current User-agent are Chrome" + proxyInfo);
         } else if (USER_AGENT.equals(operaWindows)) {
-            LOG.info("Current User-agent are Opera");
+            LOG.info("Current User-agent are Opera" + proxyInfo);
         } else if (USER_AGENT.equals(IEWindows)) {
-            LOG.info("Current User-agent are IE");
+            LOG.info("Current User-agent are IE" + proxyInfo);
         } else if (USER_AGENT.equals(EdgeWindows)) {
-            LOG.info("Current User-agent are EDGE");
+            LOG.info("Current User-agent are EDGE" + proxyInfo);
         }
 
         FrontBO frontBO = new FrontBO();
@@ -65,7 +66,7 @@ public class LoginCheckTest extends BaseTestClass {
 
         waitManager.fluentElementWait(webElement);
 
-        step("Info: Search by '" + proxyDto.getKeyword() + "'");
+        LOG.info("Info: Search by '" + proxyDto.getKeyword() + "' for site: " + proxyDto.getHost());
         webElement.sendKeys(proxyDto.getKeyword());
         webElement.sendKeys(Keys.ENTER);
 
@@ -85,10 +86,11 @@ public class LoginCheckTest extends BaseTestClass {
 
         long endTime = System.currentTimeMillis();
         long duration = (endTime - startTime);
-        step(String.format("All time one site - %02d min, %02d sec",
+
+        step(String.format("All time one site - %02d min, %02d sec, Proxy IP %s",
                 TimeUnit.MILLISECONDS.toMinutes(duration),
                 TimeUnit.MILLISECONDS.toSeconds(duration) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration))));
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)), PROXY));
         PROXY = "0";
     }
 }
