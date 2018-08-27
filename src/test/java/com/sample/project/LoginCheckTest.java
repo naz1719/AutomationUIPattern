@@ -82,8 +82,10 @@ public class LoginCheckTest extends BaseTestClass {
 
 //         Randomizer
         List<Integer> list = new ArrayList<>();
-        list.add(50000);
-        list.add(30000);
+        list.add(60000);
+        list.add(120000);
+        list.add(180000);
+        list.add(70000);
 //        list.add(10000);
 //        list.add(12000);
 
