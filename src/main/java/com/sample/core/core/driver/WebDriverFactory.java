@@ -1,7 +1,6 @@
 package com.sample.core.core.driver;
 
 import com.sample.constants.CommonConsts;
-import com.sample.core.testUtils.TestLogger;
 import com.sample.core.utils.PropertiesLoader;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,8 +15,6 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
@@ -25,7 +22,7 @@ import static com.sample.constants.CommonConsts.*;
 
 
 public class WebDriverFactory {
-    private static final TestLogger LOG = TestLogger.getLogger();
+
     protected PropertiesLoader propertiesLoader = new PropertiesLoader(CommonConsts.PATH_TO_CONFIGURATION_PROPERTIES);
 
 

@@ -13,10 +13,11 @@ import org.testng.Assert;
 import org.testng.annotations.Factory;
 import org.testng.annotations.Test;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 import static com.sample.constants.CommonConsts.*;
 import static com.sample.constants.CommonConsts.EdgeWindows;
@@ -36,17 +37,25 @@ public class LoginCheckTest extends BaseTestClass {
         PROXY = localProxy.getProxy();
         USER_AGENT = localProxy.getBrowser();
 
-        String proxyInfo = "  Proxy :" + PROXY;
+        String proxyInfo = PROXY;
+        String host = proxyDto.getHost();
+        String keywords = proxyDto.getKeyword();
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        String currentTime = dtf.format(now);
+        String win10 = "windows 10";
+        String win7 = "windows 7";
+
         if (USER_AGENT.equals(firefoxWindowsAgent)) {
-            LOG.info("Current User-agent are firefox" + proxyInfo);
+            LOG.info(host+","+currentTime+","+keywords+","+"firefox"+","+win10 + ","+proxyInfo);
         } else if (USER_AGENT.equals(chromeWindows)) {
-            LOG.info("Current User-agent are Chrome" + proxyInfo);
+            LOG.info(host+","+currentTime+","+keywords+","+"Chrome" +","+win10 + ","+proxyInfo);
         } else if (USER_AGENT.equals(operaWindows)) {
-            LOG.info("Current User-agent are Opera" + proxyInfo);
+            LOG.info(host+","+currentTime+","+keywords+","+"Opera" +","+win10 + ","+proxyInfo);
         } else if (USER_AGENT.equals(IEWindows)) {
-            LOG.info("Current User-agent are IE" + proxyInfo);
+            LOG.info(host+","+currentTime+","+keywords+","+"IE" + ","+win7 + ","+proxyInfo);
         } else if (USER_AGENT.equals(EdgeWindows)) {
-            LOG.info("Current User-agent are EDGE" + proxyInfo);
+            LOG.info(host+","+currentTime+","+keywords+","+"EDGE" + ","+win10 + ","+proxyInfo);
         }
 
         FrontBO frontBO = new FrontBO();
@@ -59,14 +68,13 @@ public class LoginCheckTest extends BaseTestClass {
             try {
                 webElement = WebDriverManager.getDriver().findElement(By.name("q"));
             } catch (Exception e2) {
-                step("The Chrome with ip " + PROXY + "  not loaded");
+                LOG.info("The Chrome with ip " + PROXY + "  not loaded");
                 Assert.fail("The Chrome with ip" + PROXY + "  not loaded");
             }
         }
 
         waitManager.fluentElementWait(webElement);
 
-        LOG.info("Info: Search by '" + proxyDto.getKeyword() + "' for site: " + proxyDto.getHost());
         webElement.sendKeys(proxyDto.getKeyword());
         webElement.sendKeys(Keys.ENTER);
 
@@ -84,13 +92,13 @@ public class LoginCheckTest extends BaseTestClass {
 
         frontBO.logic(proxyDto.getHost(), proxyDto.getKeyword(), random);
 
-        long endTime = System.currentTimeMillis();
-        long duration = (endTime - startTime);
+//        long endTime = System.currentTimeMillis();
+//        long duration = (endTime - startTime);
 
-        step(String.format("All time one site - %02d min, %02d sec, Proxy IP %s",
-                TimeUnit.MILLISECONDS.toMinutes(duration),
-                TimeUnit.MILLISECONDS.toSeconds(duration) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)), PROXY));
+//        step(String.format("All time one site - %02d min, %02d sec, Proxy IP %s",
+//                TimeUnit.MILLISECONDS.toMinutes(duration),
+//                TimeUnit.MILLISECONDS.toSeconds(duration) -
+//                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(duration)), PROXY));
         PROXY = "0";
     }
 }

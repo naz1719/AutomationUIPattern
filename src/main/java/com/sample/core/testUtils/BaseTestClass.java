@@ -21,18 +21,16 @@ public abstract class BaseTestClass {
 
     @BeforeClass
     public void browserInstantiate() {
+        LOG = TestLogger.getLogger("testCheckLogin", "LoginCheckTest");
         System.setProperty(CommonConsts.ESCAPE_PROPERTY, "false");
     }
 
-    public void step(String message) {
-        LOG.info(message);
-    }
 
 
     @BeforeMethod
     public void beforeMethod(Method method) {
-        LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
-//        createInstance();
+//        LOG = TestLogger.getLogger(method.getName(), method.getDeclaringClass().getSimpleName());
+        createInstance();
     }
 
     @AfterMethod

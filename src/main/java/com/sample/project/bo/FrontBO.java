@@ -18,7 +18,7 @@ public class FrontBO extends BaseBO {
 
     public String getMyIp() {
         String browerIp = frontPO.getMyIp();
-        step("browerIp " + browerIp);
+//        step("browerIp " + browerIp);
         return browerIp;
     }
 
@@ -35,7 +35,7 @@ public class FrontBO extends BaseBO {
             WebDriverManager.getDriver().switchTo().frame(0);
             List<WebElement> captcha = frontPO.getCaptcha();
             if (captcha.size() > 0) {
-                step("Captcha on page");
+//                step("Captcha on page");
                 Assert.fail("Captcha on page");
             }
         }
@@ -65,7 +65,7 @@ public class FrontBO extends BaseBO {
             WaitManager.sleepTimeOut(5000);
             WebDriverManager.refresh();
         } else {
-            error("Not found site " + host + " with search word " + searchWord);
+            LOG.info("Not found site " + host + " with search word " + searchWord);
             Assert.fail("Not found site " + host + " with search word " + searchWord);
         }
 

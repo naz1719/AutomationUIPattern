@@ -15,7 +15,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 
 public class TestListener implements ITestListener {
-    private TestLogger LOG;
+//    private TestLogger LOG;
     private String testName;
     private String className;
 
@@ -23,13 +23,13 @@ public class TestListener implements ITestListener {
     public void onTestStart(ITestResult iTestResult) {
         testName = iTestResult.getName().split(" ")[0];
         className = iTestResult.getTestClass().getRealClass().getSimpleName();
-        LOG = TestLogger.getLogger(testName, className);
+//        LOG = TestLogger.getLogger(testName, className);
 //        LOG.info("Start...");
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        LOG.info(" [PASSED]");
+//        LOG.info(" [PASSED]");
         File file = new File(String.format("%s/testUtils-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
 
         attachLog(file);
@@ -37,7 +37,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        LOG.info("[FAILED]");
+//        LOG.info("[FAILED]");
         captureScreenshot();
         File file = new File(String.format("%s/testUtils-output/logs/%s/%s.log", System.getProperty("user.dir"), className, testName));
         attachLog(file);
@@ -47,8 +47,8 @@ public class TestListener implements ITestListener {
     public void onTestSkipped(ITestResult iTestResult) {
         testName = iTestResult.getName().split(" ")[0];
         className = iTestResult.getTestClass().getRealClass().getSimpleName();
-        LOG = TestLogger.getLogger(testName, className);
-        LOG.info("[SKIPPED]");
+//        LOG = TestLogger.getLogger(testName, className);
+//        LOG.info("[SKIPPED]");
     }
 
     @Override
@@ -64,9 +64,9 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onFinish(ITestContext iTestContext) {
-        if (LOG != null) {
-            LOG.drop();
-        }
+//        if (LOG != null) {
+//            LOG.drop();
+//        }
     }
 
     @Attachment(value = "Page screenshot", type = "image/png")

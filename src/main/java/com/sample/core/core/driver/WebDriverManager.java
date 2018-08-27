@@ -52,7 +52,6 @@ public class WebDriverManager {
         if (!path.endsWith("/"))
             path += "/";
         getDriver().get(path);
-        LOG.info(String.format("Browser navigates to URL = %s", path));
     }
 
     public static String getTitle() {

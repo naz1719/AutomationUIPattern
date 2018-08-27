@@ -18,11 +18,4 @@ public abstract class BaseBO {
         WebDriverManager.getUrl(url);
     }
 
-    public void error(String message) {
-        LOG.error(message);
-    }
-
-    public void step(String message) {
-        LOG.info(message);
-    }
 }
