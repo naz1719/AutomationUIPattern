@@ -15,26 +15,24 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static com.sample.constants.CommonConsts.*;
 
 
 public class DataProviderSource {
-    @DataProvider(name = "proxyList")
+    @DataProvider(name = "proxyList", parallel = true)
     public static Object[][] getProxy(ITestContext context) throws IOException, JAXBException {
-//        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(1);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
 
         List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
 
         List<ProxyBrowserDto> mainList = new ArrayList<>();
         for (String aList : list) {
-            mainList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
             mainList.add(new ProxyBrowserDto(aList, chromeWindows));
             mainList.add(new ProxyBrowserDto(aList, operaWindows));
             mainList.add(new ProxyBrowserDto(aList, IEWindows));
             mainList.add(new ProxyBrowserDto(aList, EdgeWindows));
+            mainList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
         }
 
         Object[][] objArray = new Object[mainList.size()][];
@@ -48,7 +46,7 @@ public class DataProviderSource {
 
     @DataProvider(name = "search", parallel = true)
     public static Object[][] getSearchWord(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(3);
 
 
         List<String> list = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
