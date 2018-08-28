@@ -45,6 +45,7 @@ public class LoginCheckTest extends BaseTestClass {
         String currentTime = dtf.format(now);
         String win10 = "windows 10";
         String win7 = "windows 7";
+        String mac = "Mac OS X 10_11_6";
 
         if (USER_AGENT.equals(firefoxWindowsAgent)) {
             LOG.info(host+","+currentTime+","+keywords+","+"firefox"+","+win10 + ","+proxyInfo);
@@ -56,6 +57,8 @@ public class LoginCheckTest extends BaseTestClass {
             LOG.info(host+","+currentTime+","+keywords+","+"IE" + ","+win7 + ","+proxyInfo);
         } else if (USER_AGENT.equals(EdgeWindows)) {
             LOG.info(host+","+currentTime+","+keywords+","+"EDGE" + ","+win10 + ","+proxyInfo);
+        } else if (USER_AGENT.equals(SafariMac)) {
+            LOG.info(host+","+currentTime+","+keywords+","+"Safari" + ","+mac + ","+proxyInfo);
         }
 
         FrontBO frontBO = new FrontBO();

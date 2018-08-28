@@ -22,7 +22,7 @@ import static com.sample.constants.CommonConsts.*;
 public class DataProviderSource {
     @DataProvider(name = "proxyList", parallel = true)
     public static Object[][] getProxy(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
+//        context.getCurrentXmlTest().getSui    te().setDataProviderThreadCount(2);
 
         List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
 
@@ -33,6 +33,7 @@ public class DataProviderSource {
             mainList.add(new ProxyBrowserDto(aList, IEWindows));
             mainList.add(new ProxyBrowserDto(aList, EdgeWindows));
             mainList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
+            mainList.add(new ProxyBrowserDto(aList, SafariMac));
         }
 
         Object[][] objArray = new Object[mainList.size()][];
@@ -46,8 +47,7 @@ public class DataProviderSource {
 
     @DataProvider(name = "search", parallel = true)
     public static Object[][] getSearchWord(ITestContext context) throws IOException, JAXBException {
-        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(3);
-
+//        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(5);
 
         List<String> list = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
 
