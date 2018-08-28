@@ -4,6 +4,7 @@ import com.sample.core.core.driver.WebDriverManager;
 import com.sample.core.testUtils.BaseTestClass;
 import com.sample.project.bo.FrontBO;
 import com.sample.project.dataprovider.DataProviderSource;
+import com.sample.project.dto.GeneralDto;
 import com.sample.project.dto.ProxyBrowserDto;
 import com.sample.project.dto.ProxyDto;
 import org.openqa.selenium.By;
@@ -24,15 +25,17 @@ import static com.sample.constants.CommonConsts.EdgeWindows;
 
 public class LoginCheckTest extends BaseTestClass {
 
-    private ProxyBrowserDto localProxy;
-
-    @Factory(dataProviderClass = DataProviderSource.class, dataProvider = "proxyList")
-    public LoginCheckTest(ProxyBrowserDto localProxy) {
-        this.localProxy = localProxy;
-    }
+//    private ProxyBrowserDto localProxy;
+//
+//    @Factory(dataProviderClass = DataProviderSource.class, dataProvider = "proxyList")
+//    public LoginCheckTest(ProxyBrowserDto localProxy) {
+//        this.localProxy = localProxy;
+//    }
 
     @Test(skipFailedInvocations = true, dataProviderClass = DataProviderSource.class, dataProvider = "search")
-    public void testCheckLogin(ProxyDto proxyDto) throws Exception {
+    public void testCheckLogin(GeneralDto dto) throws Exception {
+        ProxyBrowserDto localProxy = dto.getProxyBrowserDto();
+        ProxyDto proxyDto = dto.getProxyDto();
 
         PROXY = localProxy.getProxy();
         USER_AGENT = localProxy.getBrowser();
@@ -61,41 +64,41 @@ public class LoginCheckTest extends BaseTestClass {
             LOG.info(host+","+currentTime+","+keywords+","+"Safari" + ","+mac + ","+proxyInfo);
         }
 
-        FrontBO frontBO = new FrontBO();
-        frontBO.openPortal(GOOGLE);
-        WebElement webElement = null;
-        try {
-            webElement = WebDriverManager.getDriver().findElement(By.name("q"));
-        } catch (Exception e) {
-            WebDriverManager.refresh();
-            try {
-                webElement = WebDriverManager.getDriver().findElement(By.name("q"));
-            } catch (Exception e2) {
-                LOG.info("The Chrome with ip " + PROXY + "  not loaded");
-                Assert.fail("The Chrome with ip" + PROXY + "  not loaded");
-            }
-        }
-
-        waitManager.fluentElementWait(webElement);
-
-        webElement.sendKeys(proxyDto.getKeyword());
-        webElement.sendKeys(Keys.ENTER);
-
-        long startTime = System.currentTimeMillis();
-
-//         Randomizer
-        List<Integer> list = new ArrayList<>();
-        list.add(60000);
-        list.add(120000);
-        list.add(180000);
-        list.add(70000);
-//        list.add(10000);
-//        list.add(12000);
-
-        Random randomizer = new Random();
-        Integer random = list.get(randomizer.nextInt(list.size()));
-
-        frontBO.logic(proxyDto.getHost(), proxyDto.getKeyword(), random);
+//        FrontBO frontBO = new FrontBO();
+//        frontBO.openPortal(GOOGLE);
+//        WebElement webElement = null;
+//        try {
+//            webElement = WebDriverManager.getDriver().findElement(By.name("q"));
+//        } catch (Exception e) {
+//            WebDriverManager.refresh();
+//            try {
+//                webElement = WebDriverManager.getDriver().findElement(By.name("q"));
+//            } catch (Exception e2) {
+//                LOG.info("The Chrome with ip " + PROXY + "  not loaded");
+//                Assert.fail("The Chrome with ip" + PROXY + "  not loaded");
+//            }
+//        }
+//
+//        waitManager.fluentElementWait(webElement);
+//
+//        webElement.sendKeys(proxyDto.getKeyword());
+//        webElement.sendKeys(Keys.ENTER);
+//
+//        long startTime = System.currentTimeMillis();
+//
+////         Randomizer
+//        List<Integer> list = new ArrayList<>();
+//        list.add(60000);
+//        list.add(120000);
+//        list.add(180000);
+//        list.add(70000);
+////        list.add(10000);
+////        list.add(12000);
+//
+//        Random randomizer = new Random();
+//        Integer random = list.get(randomizer.nextInt(list.size()));
+//
+//        frontBO.logic(proxyDto.getHost(), proxyDto.getKeyword(), random);
 
 //        long endTime = System.currentTimeMillis();
 //        long duration = (endTime - startTime);

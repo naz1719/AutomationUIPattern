@@ -1,6 +1,7 @@
 package com.sample.project.dataprovider;
 
 import com.google.common.io.Files;
+import com.sample.project.dto.GeneralDto;
 import com.sample.project.dto.ProxyBrowserDto;
 import com.sample.project.dto.ProxyDto;
 import org.apache.commons.io.Charsets;
@@ -20,51 +21,74 @@ import static com.sample.constants.CommonConsts.*;
 
 
 public class DataProviderSource {
-    @DataProvider(name = "proxyList", parallel = true)
-    public static Object[][] getProxy(ITestContext context) throws IOException, JAXBException {
-//        context.getCurrentXmlTest().getSui    te().setDataProviderThreadCount(2);
-
-        List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
-
-        List<ProxyBrowserDto> mainList = new ArrayList<>();
-        for (String aList : list) {
-            mainList.add(new ProxyBrowserDto(aList, chromeWindows));
-            mainList.add(new ProxyBrowserDto(aList, operaWindows));
-            mainList.add(new ProxyBrowserDto(aList, IEWindows));
-            mainList.add(new ProxyBrowserDto(aList, EdgeWindows));
-            mainList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
-            mainList.add(new ProxyBrowserDto(aList, SafariMac));
-        }
-
-        Object[][] objArray = new Object[mainList.size()][];
-        for (int i = 0; i < mainList.size(); i++) {
-            objArray[i] = new Object[1];
-            objArray[i][0] = mainList.get(i);
-        }
-        return objArray;
-    }
+//    @DataProvider(name = "proxyList", parallel = true)
+//    public static Object[][] getProxy(ITestContext context) throws IOException, JAXBException {
+////        context.getCurrentXmlTest().getSui    te().setDataProviderThreadCount(2);
+//
+//        List<String> list = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
+//
+//        List<ProxyBrowserDto> mainList = new ArrayList<>();
+//        for (String aList : list) {
+//            mainList.add(new ProxyBrowserDto(aList, chromeWindows));
+//            mainList.add(new ProxyBrowserDto(aList, operaWindows));
+//            mainList.add(new ProxyBrowserDto(aList, IEWindows));
+//            mainList.add(new ProxyBrowserDto(aList, EdgeWindows));
+//            mainList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
+//            mainList.add(new ProxyBrowserDto(aList, SafariMac));
+//        }
+//
+//        Object[][] objArray = new Object[mainList.size()][];
+//        for (int i = 0; i < mainList.size(); i++) {
+//            objArray[i] = new Object[1];
+//            objArray[i][0] = mainList.get(i);
+//        }
+//        return objArray;
+//    }
 
 
     @DataProvider(name = "search", parallel = true)
     public static Object[][] getSearchWord(ITestContext context) throws IOException, JAXBException {
-//        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(5);
+        context.getCurrentXmlTest().getSuite().setDataProviderThreadCount(2);
 
-        List<String> list = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
+        List<String> proxy = Files.readLines(new File("input/proxy.txt"), Charsets.UTF_8);
+        List<String> searchList = FileUtils.readLines(new File("input/search.txt"), Charsets.UTF_8);
 
-        List<ProxyDto> proxyDtoList = new ArrayList<>();
-        for (String string : list) {
+
+//      proxy
+        List<ProxyBrowserDto> proxyList = new ArrayList<>();
+        for (String aList : proxy) {
+            proxyList.add(new ProxyBrowserDto(aList, chromeWindows));
+            proxyList.add(new ProxyBrowserDto(aList, operaWindows));
+            proxyList.add(new ProxyBrowserDto(aList, IEWindows));
+            proxyList.add(new ProxyBrowserDto(aList, EdgeWindows));
+            proxyList.add(new ProxyBrowserDto(aList, firefoxWindowsAgent));
+            proxyList.add(new ProxyBrowserDto(aList, SafariMac));
+        }
+
+
+//      search
+        List<ProxyDto> searchDtoList = new ArrayList<>();
+        for (String string : searchList) {
             if (string.isEmpty()) {
                 break;
             }
             List<String> stringList = Arrays.asList(string.split(","));
-            proxyDtoList.add(new ProxyDto(stringList.get(0), stringList.get(1)));
+            searchDtoList.add(new ProxyDto(stringList.get(0), stringList.get(1)));
         }
 
+//        All
+        List<GeneralDto> dtoList = new ArrayList<>();
 
-        Object[][] objArray = new Object[proxyDtoList.size()][];
-        for (int i = 0; i < proxyDtoList.size(); i++) {
+        for (ProxyBrowserDto proxyBrowserDto : proxyList) {
+            for (ProxyDto proxyDto : searchDtoList) {
+                dtoList.add(new GeneralDto(proxyBrowserDto,proxyDto));
+            }
+        }
+
+        Object[][] objArray = new Object[dtoList.size()][];
+        for (int i = 0; i < dtoList.size(); i++) {
             objArray[i] = new Object[1];
-            objArray[i][0] = proxyDtoList.get(i);
+            objArray[i][0] = dtoList.get(i);
         }
         return objArray;
     }
